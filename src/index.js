@@ -1,24 +1,3 @@
-/*
-write your code here
-"Enter a city" (example: Paris), alert "It is currently 19°C (66°F) in Paris with a humidity of 80%"
-alert "Sorry, we don't know the weather for this city, try going to https://www.google.com/search?q=weather+sydney".
-
-let city = prompt("Enter a City???").toLowerCase();
-
-if (weather[city] !== undefined) {
-let humidity = weather[city].humidity;
-let temp = Math.round(weather[city].temp);
-let tempF = Math.round(weather[city].temp * 1.8) + 32;
-
-alert(
-`It is currently ${temp}ºC (${tempF}ºF) in ${city} with a humidity of ${humidity}%.`
-);
-} else {
-alert(
-`Sorry, we do not know the weather for this city. Try going to https://www.google.com/search?q=weather+${city}`
- );
-}*/
-
 let now = new Date();
 
 let days = [
@@ -80,13 +59,12 @@ function showTemperature(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
-function searchCity(event) {
-  event.preventDefault();
+function searchCity(typeCity) {
   let apiKey = "84bf783b0426ae0eabcc200e14cbdb41";
-  let typeCity = document.querySelector("#searchBar");
-  let h5 = document.querySelector("#newCity");
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${typeCity.value}&units=metric&appid=${apiKey}`;
-  h5.innerHTML = `${typeCity.value}`;
+  //let typeCity = document.querySelector("#searchBar");
+  //let h5 = document.querySelector("#newCity");
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${typeCity}&units=metric&appid=${apiKey}`;
+  //h5.innerHTML = `${typeCity.value}`;
   axios.get(apiUrl).then(showTemperature);
 }
 
@@ -161,3 +139,5 @@ fahrenheitLink.addEventListener("click", nowFahrenheit);
 
 let celsiusLink = document.querySelector("#celsius");
 celsiusLink.addEventListener("click", nowCelsius);
+
+searchCity("Houston");
