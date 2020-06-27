@@ -95,29 +95,30 @@ nowDay.innerHTML = ` ${day} - ${month}/${date}`;
 let nowTime = document.querySelector("#time");
 nowTime.innerHTML = ` ${hours}:${minutes}`;
 
-//WEEK 5
-
 function showTemperature(response) {
   let weatherTemp = document.querySelector("#newTemp");
   let tempNow = Math.round(response.data.main.temp);
+  let description = document.querySelector("#tempDescription");
+  let feels = document.querySelector("#feels");
+  let humidity = response.data.main.humidity;
+  let div = document.querySelector(`#humidity`);
+  let windBlowing = document.querySelector("#wind");
+  let iconElement = document.querySelector("#icon");
 
   weatherTemp.innerHTML = `${tempNow}`;
-
-  let description = document.querySelector("#tempDescription");
   description.innerHTML = response.data.weather[0].main;
-  //console.log(response);
-  let feels = document.querySelector("#feels");
   feels.innerHTML = `Feels like ${Math.round(
     response.data.main.feels_like
   )} ºC`;
-
-  let humidity = response.data.main.humidity;
-  let div = document.querySelector(`#humidity`);
   div.innerHTML = `Humidity: ${humidity} %`;
-
-  let windBlowing = document.querySelector("#wind");
   windBlowing.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} m/s`;
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
+
 function searchCity(event) {
   event.preventDefault();
   let apiKey = "84bf783b0426ae0eabcc200e14cbdb41";
@@ -139,13 +140,11 @@ function showWeather(response) {
   tempSelect.innerHTML = `${currentTemp}`;
 
   let placeSelector = document.querySelector("#newCity");
-  //console.log(response);
   let currentLocation = response.data.name;
   placeSelector.innerHTML = `${currentLocation}`;
 
   let description = document.querySelector("#tempDescription");
   description.innerHTML = response.data.weather[0].main;
-  //console.log(response);
   let feels = document.querySelector("#feels");
   feels.innerHTML = `Feels like ${Math.round(
     response.data.main.feels_like
