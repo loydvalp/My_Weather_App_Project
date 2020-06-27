@@ -66,7 +66,6 @@ function showTemperature(response) {
 
   celsiusScale = response.data.main.temp;
 
-  tempElement.innerHTML = Math.round(celsiusScale);
   weatherTemp.innerHTML = `${tempNow}`;
   description.innerHTML = response.data.weather[0].main;
   feels.innerHTML = `Feels like ${Math.round(
