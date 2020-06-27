@@ -139,11 +139,11 @@ weatherNowButton.addEventListener("click", showWeatherNow);
 
 function nowFahrenheit(event) {
   event.preventDefault();
-  let tempElement = document.querySelector("#tempNow");
+  let tempElement = document.querySelector("#newTemp");
 
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
-  let fahrenheitScale = celsiusScale * 1.8 + 32;
+  let fahrenheitScale = (celsiusScale * 9) / 5 + 32;
   tempElement.innerHTML = Math.round(fahrenheitScale);
 }
 
@@ -151,14 +151,14 @@ function nowCelsius(event) {
   event.preventDefault();
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
-  let tempElement = document.querySelector("#tempNow");
+  let tempElement = document.querySelector("#newTemp");
   tempElement.innerHTML = Math.round(celsiusScale);
 }
 
 let celsiusScale = null;
 
-let celsiusLink = document.querySelector("#celsius");
-celsiusLink.addEventListener("click", nowCelsius);
-
 let fahrenheitLink = document.querySelector("#fahrenheit");
 fahrenheitLink.addEventListener("click", nowFahrenheit);
+
+let celsiusLink = document.querySelector("#celsius");
+celsiusLink.addEventListener("click", nowCelsius);
