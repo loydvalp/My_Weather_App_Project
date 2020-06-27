@@ -172,3 +172,9 @@ fahrenheitLink.addEventListener("click", nowFahrenheit);
 
 let celsiusLink = document.querySelector("#celsius");
 celsiusLink.addEventListener("click", nowCelsius);
+
+let h5 = document.querySelector("#newCity");
+let apiKey = "84bf783b0426ae0eabcc200e14cbdb41";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Houston&units=metric&appid=${apiKey}`;
+h5.innerHTML = `Houston`;
+axios.get(apiUrl).then(showTemperature);

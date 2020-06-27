@@ -30,10 +30,12 @@ h1 {
 }
 
 .fa-search {
+  color: rgb(35, 35, 99);
   font-size: 30px;
 }
 
 .fa-location-arrow {
+  color: rgb(35, 35, 99);
   font-size: 30px;
 }
 
