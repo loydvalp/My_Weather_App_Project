@@ -1,27 +1,4 @@
-/*Homework 3 below
-let weather = {
-paris: {
-temp: 19.7,
-humidity: 80
-},
-tokyo: {
-temp: 17.3,
-humidity: 50
-},
-lisbon: {
-temp: 30.2,
-humidity: 20
-},
-"san francisco": {
-temp: 20.9,
-humidity: 100
-},
-moscow: {
-temp: -5,
-humidity: 20
-}
-};
-
+/*
 write your code here
 "Enter a city" (example: Paris), alert "It is currently 19°C (66°F) in Paris with a humidity of 80%"
 alert "Sorry, we don't know the weather for this city, try going to https://www.google.com/search?q=weather+sydney".
@@ -42,9 +19,6 @@ alert(
  );
 }*/
 
-//Homework 4 below
-//display the current date and time
-
 let now = new Date();
 
 let days = [
@@ -56,21 +30,6 @@ let days = [
   "Friday",
   "Saturday",
 ];
-
-/*let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];*/
 
 let day = days[now.getDay()];
 let month = now.getMonth() + 1;
@@ -105,6 +64,9 @@ function showTemperature(response) {
   let windBlowing = document.querySelector("#wind");
   let iconElement = document.querySelector("#icon");
 
+  celsiusScale = response.data.main.temp;
+
+  tempElement.innerHTML = Math.round(celsiusScale);
   weatherTemp.innerHTML = `${tempNow}`;
   description.innerHTML = response.data.weather[0].main;
   feels.innerHTML = `Feels like ${Math.round(
@@ -175,25 +137,28 @@ function showWeatherNow(event) {
 let weatherNowButton = document.querySelector("#weatherCurrent");
 weatherNowButton.addEventListener("click", showWeatherNow);
 
-//add a search engine, when searching for a city...display city name on play
-
-//BONUS*** display a fake temperature in Celsius and covert to Fahrenheit
-
-/*function nowCelsius(event) {
-  let celsius = 34;
-  event.preventDefault();
-  let ºc = document.querySelector(".tempNow");
-  ºc.innerHTML = celsius;
-}
 function nowFahrenheit(event) {
-  let fahrenheit = 92;
   event.preventDefault();
-  let ºf = document.querySelector(".tempNow");
-  ºf.innerHTML = fahrenheit;
+  let tempElement = document.querySelector("#tempNow");
+
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheitScale = celsiusScale * 1.8 + 32;
+  tempElement.innerHTML = Math.round(fahrenheitScale);
 }
 
-let celsiusScale = document.querySelector("#celsius");
-let fahrenheitScale = document.querySelector("#fahrenheit");
+function nowCelsius(event) {
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  let tempElement = document.querySelector("#tempNow");
+  tempElement.innerHTML = Math.round(celsiusScale);
+}
 
-celsiusScale.addEventListener("click", nowCelsius);
-fahrenheitScale.addEventListener("click", nowFahrenheit);*/
+let celsiusScale = null;
+
+let celsiusLink = document.querySelector("#celsius");
+celsiusLink.addEventListener("click", nowCelsius);
+
+let fahrenheitLink = document.querySelector("#fahrenheit");
+fahrenheitLink.addEventListener("click", nowFahrenheit);
