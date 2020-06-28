@@ -60,6 +60,7 @@ function showTemperature(response) {
 }
 
 function displayForecast(response) {
+  console.log(response.data.list[0]);
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = null;
   let forecast = null;
@@ -74,21 +75,14 @@ function displayForecast(response) {
       <img
         src="http://openweathermap.org/img/wn/${
           forecast.weather[0].icon
-        }@2x.png"
-      />
-      <div class="weather-forecast-temperature">
-        <strong>
-          ${Math.round(forecast.main.temp_max)}°
-        </strong>
-        ${Math.round(forecast.main.temp_min)}°
-      </div>
-    </div>
-  `;
+        }@2x.png" alt="" id="weekDay"><strong>${Math.round(
+      forecast.main.temp_max
+    )}°</strong></div>`;
   }
 }
 
 //rewrite code so front page will look good
-function searchCity(event) {
+/*function searchCity(event) {
   event.preventDefault();
   let apiKey = "84bf783b0426ae0eabcc200e14cbdb41";
   let typeCity = document.querySelector("#searchBar");
@@ -98,11 +92,30 @@ function searchCity(event) {
   axios.get(apiUrl).then(showTemperature);
 
   apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${typeCity.value}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);}*/
+
+/*let searchForm = document.querySelector("#findCity");
+searchForm.addEventListener("submit", searchCity);*/
+
+function searchCity(city) {
+  let apiKey = "84bf783b0426ae0eabcc200e14cbdb41";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  axios.get(apiUrl).then(showTemperature);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
+}
+function submitCity(event) {
+  event.preventDefault();
+  let inputElement = document.querySelector("#searchBar");
+  let h5 = document.querySelector("#newCity");
+  h5.innerHTML = inputElement.value;
 }
 
 let searchForm = document.querySelector("#findCity");
-searchForm.addEventListener("submit", searchCity);
+searchForm.addEventListener("submit", submitCity);
+
+searchCity("Houston");
 
 function showWeather(response) {
   let tempSelect = document.querySelector("#newTemp");
@@ -173,8 +186,8 @@ fahrenheitLink.addEventListener("click", nowFahrenheit);
 let celsiusLink = document.querySelector("#celsius");
 celsiusLink.addEventListener("click", nowCelsius);
 
-let h5 = document.querySelector("#newCity");
+/*let h5 = document.querySelector("#newCity");
 let apiKey = "84bf783b0426ae0eabcc200e14cbdb41";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Houston&units=metric&appid=${apiKey}`;
 h5.innerHTML = `Houston`;
-axios.get(apiUrl).then(showTemperature);
+axios.get(apiUrl).then(showTemperature);*/
