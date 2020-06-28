@@ -5,15 +5,17 @@ body {
   background-color: transparent;
 }
 
-.container {
-  display: block;
-  position: relative;
-  margin: 0 auto;
-  width: 100%;
-  height: 100%;
-  border-radius: 30px;
-  padding: 25px;
-  border: 5px solid rgb(32, 32, 33, 0.6);
+.appWrapper {
+  height: auto;
+
+  margin: 20px auto;
+}
+
+.weatherApp {
+  padding: 30px;
+  border: 1px solid rgb(52, 108, 165);
+  border-radius: 5px;
+  background-color: rgb(52, 108, 165);
 }
 
 h1,

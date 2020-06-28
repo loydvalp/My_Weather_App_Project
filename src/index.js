@@ -33,6 +33,36 @@ nowDay.innerHTML = ` ${day} - ${month}/${date}`;
 let nowTime = document.querySelector("#time");
 nowTime.innerHTML = ` ${hours}:${minutes}`;
 
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[date.getDay()];
+  return `${day} ${formatHours(timestamp)}`;
+}
+
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${hours}:${minutes}`;
+}
+
 function showTemperature(response) {
   let weatherTemp = document.querySelector("#newTemp");
   let tempNow = Math.round(response.data.main.temp);
@@ -60,7 +90,6 @@ function showTemperature(response) {
 }
 
 function displayForecast(response) {
-  console.log(response.data.list[0]);
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = null;
   let forecast = null;
@@ -75,9 +104,16 @@ function displayForecast(response) {
       <img
         src="http://openweathermap.org/img/wn/${
           forecast.weather[0].icon
-        }@2x.png" alt="" id="weekDay"><strong>${Math.round(
-      forecast.main.temp_max
-    )}°</strong></div>`;
+        }@2x.png"
+      />
+      <div class="weather-forecast-temperature">
+        <strong>
+          ${Math.round(forecast.main.temp_max)}°
+        </strong>
+        ${Math.round(forecast.main.temp_min)}°
+      </div>
+    </div>
+  `;
   }
 }
 
@@ -105,11 +141,13 @@ function searchCity(city) {
   apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
+
 function submitCity(event) {
   event.preventDefault();
   let inputElement = document.querySelector("#searchBar");
   let h5 = document.querySelector("#newCity");
   h5.innerHTML = inputElement.value;
+  searchCity(inputElement.value);
 }
 
 let searchForm = document.querySelector("#findCity");
