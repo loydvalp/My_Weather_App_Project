@@ -52,7 +52,8 @@ h1 {
 
 .todayWeather {
   margin: 50px;
-  border: 2px solid rgba(175, 163, 175, 0.6);
+  border: 2px solid;
+  color: rgb(52, 108, 165);
 }
 
 .outsideNow {
@@ -60,29 +61,35 @@ h1 {
   margin: 25px;
 }
 
-p {
-  font-size: bold;
+.weather-forecast {
+  margin-top: 10px;
 }
 
-.icon {
-  display: block;
-  max-width: 300px;
-  margin: 15px 0px 10px 50px;
-}
-
-.WeatherForcast {
+.weather-forecast h3 {
+  color: rgb(188, 197, 207);
+  font-size: 20px;
+  font-weight: 400;
   text-align: center;
-  border-radius: 20px;
-  padding: 20px;
-  border: 2px solid black;
+  height: 15px;
+  line-height: 15px;
+  padding-top: 7px;
 }
 
-.forecast {
-  text-align: left;
-  font-family: "Comic Neue", cursive;
-  color: black;
-  font-size: larger;
-  font-weight: bolder;
+.weather-forecast img {
+  display: block;
+  margin: 0 auto;
+  height: 50px;
+  width: 50px;
+}
+
+.weather-forecast-temperature {
+  text-align: center;
+  color: rgb(135, 135, 135);
+  font-size: 15px;
+  font-weight: 400;
+  height: auto;
+  line-height: 15px;
+  white-space: nowrap;
 }
 
 .author {
